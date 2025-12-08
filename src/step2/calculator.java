@@ -2,6 +2,7 @@ package step2;
 
 public class calculator {
     //속성
+    private int calculatorResult = 0;//연산 결과값 클래스에 캡슐화를 통한 저장
     int result = 0;//연산 결과값 저장
 
     //생성자
@@ -10,7 +11,7 @@ public class calculator {
     }
 
     //메서드
-    public int calculate(int number1, int number2, String calculationType){
+    int calculate(int number1, int number2, String calculationType){
 
         switch (calculationType) {
             case "+":
@@ -44,6 +45,13 @@ public class calculator {
                 System.exit(0);
         }
         return result;
+    }
+
+    public int getResult() {
+        return this.calculatorResult;
+    }
+    public void setResult(int result) {
+        this.calculatorResult = result;
     }
 
 }
