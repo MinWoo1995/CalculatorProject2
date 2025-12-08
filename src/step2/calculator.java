@@ -1,8 +1,11 @@
 package step2;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class calculator {
     //속성
-    private int calculatorResult = 0;//연산 결과값 클래스에 캡슐화를 통한 저장
+    private List<Integer> calculatorResult = new ArrayList();//연산 결과값 클래스에 캡슐화를 통한 저장
     int result = 0;//연산 결과값 저장
 
     //생성자
@@ -47,10 +50,10 @@ public class calculator {
         return result;
     }
 
-    public int getResult() {
+    public List<Integer> getResult() {
         return this.calculatorResult;
     }
-    public void setResult(int result) {
+    public void setResult(List<Integer> result) {
         this.calculatorResult = result;
     }
 
