@@ -56,6 +56,10 @@ public class calculator {
     public void setResult(List<Integer> result) {
         this.calculatorResult = result;
     }
+    public void removeResult(int i) {
+        this.calculatorResult.remove(i);
+        System.out.println("가장 먼저 저장된 결과값을 삭제 하였습니다.");
+    }
 
 }
 

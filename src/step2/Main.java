@@ -132,9 +132,26 @@ public class Main {
                 resultReceive=calculator.getResult();
                 System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
 
+                while(true){
+                    System.out.println("가장 먼저 저장된 결과값을 삭제 하시겠습니까? (Y/y or N/n)");
+                    String answer = sc.nextLine();
+                    if (answer.equals("Y")) {
+                        calculator.removeResult(0);
+                        System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
+                        break;
+                    } else if (answer.equals("y")) {
+                        calculator.removeResult(0);
+                        System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
+                        break;
+                    } else if (answer.equals("N")) {
+                        break;
+                    } else if (answer.equals("n")) {
+                        break;
+                    } else {
+                        System.out.println("잘못 입력 하셨습니다. (Y/y) 또는 (N/n) 만 입력해주세요");
+                    }
 
-
-
+                }
 
 
                 while (true) {
