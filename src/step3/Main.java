@@ -6,6 +6,7 @@ import step3.calculator;//복붙과정에 step2.으로 설정되어있어, 오�
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -142,19 +143,58 @@ public class Main {
                 if (answer.equals("Y")) {//입력받은 답변에 따른 처리구문들
                     calculator.removeResult(0);//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
                     System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");//삭제후 남은 저장값 출력
-                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else if (answer.equals("y")) {//입력받은 답변에 따른 처리구문들
                     calculator.removeResult(0);//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
                     System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");//삭제후 남은 저장값 출력
-                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else if (answer.equals("N")) {//삭제를 원하지 않는다면, 계산을 할지말지로 넘어감
-                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else if (answer.equals("n")) {//삭제를 원하지 않는다면, 계산을 할지말지로 넘어감
-                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else {//위에 조건에 만족하지 않는 값이 입력시 오류문을 출력하고 재입력을 받도록함
                     System.out.println("잘못 입력 하셨습니다. (Y/y) 또는 (N/n) 만 입력해주세요");
                 }
 
+            }
+
+            while(true){
+                System.out.println("입력한 값보다 큰 저장된 값을 찾으시겠습니까? (Y/y) 또는 (N/n)");
+                String answer1 = sc.nextLine();//답변을 입력받음
+                if (answer1.equals("Y")) {//입력받은 답변에 따른 처리구문들
+                    System.out.print("기준이 될 실수를 입력하세요: ");
+                    String answer2 = sc.nextLine();//답변을 입력받음
+                    try{
+                        Double a = Double.parseDouble(answer2);//입력값을 더블로 변환
+                        System.out.print("기준 값"+a+"보다 큰 저장된 결과값");
+                        resultReceive.stream()
+                                .filter(result1->result1 > a)
+                                .forEach(result1 -> System.out.println(result1));
+                        break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    }catch(NumberFormatException e){
+                        System.out.println("잘못 입력 하셨습니다. 실수만 입력해주세요");
+                    }
+                } else if (answer1.equals("y")) {//입력받은 답변에 따른 처리구문들
+                    System.out.print("기준이 될 실수를 입력하세요: ");
+                    String answer2 = sc.nextLine();//답변을 입력받음
+                    try{
+                        Double a = Double.parseDouble(answer2);//입력값을 더블로 변환
+                        System.out.println("기준 값"+a+"보다 큰 저장된 결과값");
+                        resultReceive.stream()//준비단계
+                                .filter(result1->result1 > a)//입력기준값보다 큰 저장값
+                                .forEach(result1 -> System.out.println(result1));//출력
+                        break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                    }catch(NumberFormatException e){
+                        System.out.println("잘못 입력 하셨습니다. 실수만 입력해주세요");
+                    }
+                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                } else if (answer1.equals("N")) {//삭제를 원하지 않는다면, 계산을 할지말지로 넘어감
+                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                } else if (answer1.equals("n")) {//삭제를 원하지 않는다면, 계산을 할지말지로 넘어감
+                    break;//해당 반복문을 탈출하여, 계속 계산을 할지말지 결정문으로 넘어감
+                } else {//위에 조건에 만족하지 않는 값이 입력시 오류문을 출력하고 재입력을 받도록함
+                    System.out.println("잘못 입력 하셨습니다. (Y/y) 또는 (N/n) 만 입력해주세요");
+                }
             }
 
 
@@ -175,3 +215,6 @@ public class Main {
         }
     }
 }
+//실행시 인트형 변환 오류가 발생하여 오류 분석과 수정으로 1시간 이상을 소요[문제]
+//인텔리제이 실행시 타켓 메인이 스탭2 메인을 돌리는 것으로 스탭3 메인 실행시 오류가 발생한것
+//스탭3 메인으로 실행을 진행시 전혀 문제 없이 정상 작동[해결]
