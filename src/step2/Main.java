@@ -127,7 +127,8 @@ public class Main {
 
                 result=calculator.calculate(number1, number2, calculationType);//해당 기능의 메서드 활용후 리턴값 저장
                 resultList.add(result);
-                calculator.setResult(resultList);
+                calculator.setResult(resultList);//메서드는 배열 객체인데, 일반 변수를 넘겨 오류가 발생[문제]
+                //resultList를 배열객체로 만들어 객체를 메서드로 넘겨 값을 셋 하도록 변경[해결]
                 System.out.println("결과값을 저장 하였습니다.");
                 resultReceive=calculator.getResult();
                 System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
