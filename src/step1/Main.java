@@ -10,7 +10,8 @@ public class Main {
         String num2;//두번째 변수 입력값
         int number2;//검증이 끝난 두번째 변수값
         String intype;//사칙연산 부호
-        String calculationType;
+        String calculationType;//검증이 끝난 연산 부호 저장
+        int result = 0;//결과값 저장
 
 
         Scanner sc = new Scanner(System.in);
@@ -125,12 +126,6 @@ public class Main {
             }
         }
 
-
-
-//---------------------------------------------아래는 기능 구현전 --------------------------------------------
-
-
-
 //        - [ ]  **위에서 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력하기**
 //                - [ ]  키워드 : `if` `switch`
 //        - [ ]  사칙연산 기호에 맞는 연산자를 사용하여 연산을 진행합니다.
@@ -138,11 +133,39 @@ public class Main {
 //        - [ ]  연산 오류가 발생할 경우 해당 오류에 대한 내용을 정제하여 출력합니다.
 //        - [ ]  ex) “나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.“
 
-                Scanner sc = new Scanner(System.in);
-                int result = 0;
-                /* 제어문을 활용하여 위 요구사항을 만족할 수 있게 구현합니다.*/
-                System.out.println("결과: " + result);
+        switch(calculationType){
+            case "+":
+                result = number1 + number2;
+                System.out.println("결과 : "+"number1 "+calculationType+" number2"+" = "+result);
+                System.out.println("");
+                break;
+            case "-":
+                result = number1 - number2;
+                System.out.println("결과 : "+"number1 "+calculationType+" number2"+" = "+result);
+                System.out.println("");
+                break;
+            case "*":
+                result = number1 * number2;
+                System.out.println("결과 : "+"number1 "+calculationType+" number2"+" = "+result);
+                System.out.println("");
+                break;
+            case "/":
+                if(number2 == 0){
+                    System.out.println("'/'연산시 0으로 나눌수 없습니다.");
+                    break;
+                }else if(true){
+                    result = number1 / number2;
+                    System.out.println("결과 : "+"number1 "+calculationType+" number2"+" = "+result);
+                    System.out.println("");
+                    break;
+                }
 
+            default:
+                System.out.println("예상치 못한 오류가 발생하였습니다. 처음부터 다시 진행해주세요.");
+                break;
+        }
+
+        //---------------------------------------------아래는 기능 구현전 --------------------------------------------
 
 
 //        - [ ]  **반복문을 사용하되, 반복의 종료를 알려주는 “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행할 수 있도록 소스 코드를 수정하기**
