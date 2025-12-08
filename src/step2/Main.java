@@ -12,6 +12,7 @@ public class Main {
             String intype;//사칙연산 부호
             String calculationType;//검증이 끝난 연산 부호 저장
             int result = 0;//결과값 저장
+            int resultReceive = 0;//저장된 결과값 저장
 
             Scanner sc = new Scanner(System.in);
 
@@ -122,6 +123,11 @@ public class Main {
 
 
                 result=calculator.calculate(number1, number2, calculationType);//해당 기능의 메서드 활용후 리턴값 저장
+                calculator.setResult(result);
+                System.out.println("결과값을 저장 하였습니다.");
+                resultReceive=calculator.getResult();
+                System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
+
 
 
 
