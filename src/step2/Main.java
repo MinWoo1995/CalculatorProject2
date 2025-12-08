@@ -1,6 +1,8 @@
 package step2;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
         public static void main(String[] args) {
@@ -12,11 +14,12 @@ public class Main {
             String intype;//사칙연산 부호
             String calculationType;//검증이 끝난 연산 부호 저장
             int result = 0;//결과값 저장
-            int resultReceive = 0;//저장된 결과값 저장
 
             Scanner sc = new Scanner(System.in);
 
             calculator calculator = new calculator();//연산을 담당하는 클래스 인스턴스화
+            List<Integer> resultList = new ArrayList<>();//결과를 저장하는 배열
+            List<Integer> resultReceive = new ArrayList<>();//저장된 결과를 저장하는 배열
 
             while(true){
                 while (true) {
@@ -123,14 +126,32 @@ public class Main {
 
 
                 result=calculator.calculate(number1, number2, calculationType);//해당 기능의 메서드 활용후 리턴값 저장
-                calculator.setResult(result);
+                resultList.add(result);
+                calculator.setResult(resultList);
                 System.out.println("결과값을 저장 하였습니다.");
                 resultReceive=calculator.getResult();
                 System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
 
+                while(true){
+                    System.out.println("가장 먼저 저장된 결과값을 삭제 하시겠습니까? (Y/y or N/n)");
+                    String answer = sc.nextLine();
+                    if (answer.equals("Y")) {
+                        calculator.removeResult(0);
+                        System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
+                        break;
+                    } else if (answer.equals("y")) {
+                        calculator.removeResult(0);
+                        System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");
+                        break;
+                    } else if (answer.equals("N")) {
+                        break;
+                    } else if (answer.equals("n")) {
+                        break;
+                    } else {
+                        System.out.println("잘못 입력 하셨습니다. (Y/y) 또는 (N/n) 만 입력해주세요");
+                    }
 
-
-
+                }
 
 
                 while (true) {
