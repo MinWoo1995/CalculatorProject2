@@ -11,18 +11,22 @@ public class Main {
     public static void main(String[] args) {
 
         String num1;//첫번째 변수 입력값
-        int number1;//검증이 끝난 첫번째 변수값
+        Double num11;//첫번째 검증이 끝난 입력값
         String num2;//두번째 변수 입력값
-        int number2;//검증이 끝난 두번째 변수값
+        Double num22;//두번째 검증이 끝난 입력값
         String intype;//사칙연산 부호
         String calculationType;//검증이 끝난 연산 부호 저장
-        int result = 0;//결과값 저장
+        double result = 0;//결과값 저장
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);//스캐너 활용을 위한 객체 선언
 
         calculator calculator = new calculator();//연산을 담당하는 클래스 인스턴스화
-        List<Integer> resultList = new ArrayList<>();//결과를 저장하는 배열
-        List<Integer> resultReceive = new ArrayList<>();//저장된 결과를 저장하는 배열
+        calculator<Double> doubleNum1 = new calculator();//연산을 담당하는 클래스 및 제네릭 활용을 위한 인스턴스화
+        calculator<Double> doubleNum2 = new calculator();//연산을 담당하는 클래스 및 제네릭 활용을 위한 인스턴스화
+
+
+        List<Double> resultList = new ArrayList<>();//결과를 저장하는 배열
+        List<Double> resultReceive = new ArrayList<>();//저장된 결과를 저장하는 배열
         OperatorType op = null;//객체화가 필요가 없다.[이미 정의된 상수 객체이기때문에][문제]
 
 
@@ -36,8 +40,8 @@ public class Main {
                 boolean condition = true;//입력값 검증상태를 저장하기 위해서
                 int dotCount = 0;//'.'이 2개이상 입력될수 없는 검증을 위해서
 
-                if (num1.equals("-") || num1.equals(".")) {
-                    condition = false;//첫번째 자리에 -나 . 이 입력되는 경우 잘못된 입력으로 처리
+                if (num1.equals(".")) {
+                    condition = false;//첫번째 자리에 . 이 입력되는 경우 잘못된 입력으로 처리
                 } else {
                     for (int i = 0; i < num1.length(); i++) {
                         char a = num1.charAt(i);//입력값 0번째부터 담아서 입력값을 1자리씩 검증하기 위한단계
@@ -46,26 +50,20 @@ public class Main {
                             continue;//입력값이 0부터 9사이 숫자면 통과
                         } else if (a == '.') {
                             dotCount++;//'.'갯수 체크
-                            if (dotCount > 1) {//소수점이 2개 이상이면 오류 출력
+                            if (dotCount >= 2) {//소수점이 2개 이상이면 오류 출력
                                 condition = false;
                                 break;//오류문구 출력하러 가기!
                             }
-                        } else if (a == '-') {//맨앞에 '-'를 입력할수없다->음수 입력불가
-                            if (i != 0) {
-                                condition = false;
-                                break;
-                            }
-                        } else {
-                            condition = false; //숫자,'.','-' 외 문자 입력시 오류 출력
-                            break;
                         }
                     }
                 }
                 if (condition == true) {
-                    number1 = Integer.parseInt(num1);//검증이 끝난 문자열을 정수로 변환하여 변수에 저장
+                    //number1 = Integer.parseInt(num1);
+                    num11 = Double.parseDouble(num1);//검증이 끝난 문자열을 정수로 변환하여 변수에 저장
+                    doubleNum1.setGnumber(num11);
                     break;
-                } else {
-                    System.out.println("0을 포함한 정수만 입력하세요!!!");
+                } else {//컨디션이 트루가 아니라면 오류문을 출력하고 다시 재입력을 시작함
+                    System.out.println("0을 포함한 실수만 입력하세요!!!");
                     System.out.println(".은 한개만 입력가능하며 - 단독입력 불가합니다.");
                 }
             }
@@ -95,13 +93,13 @@ public class Main {
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
                 //어떤 값이 입력될지 모르기때문에 String 타입으로 입력 받기
-                num2 = sc.nextLine();//첫번재 양의 정수를 입력받는다.
+                num2 = sc.nextLine();//두번재 양의 정수를 입력받는다.
 
                 boolean condition = true;//입력값 검증상태를 저장하기 위해서
                 int dotCount = 0;//'.'이 2개이상 입력될수 없는 검증을 위해서
 
-                if (num2.equals("-") || num2.equals(".")) {
-                    condition = false;//첫번째 자리에 -나 . 이 입력되는 경우 잘못된 입력으로 처리
+                if (num2.equals(".")) {
+                    condition = false;//첫번째 자리에 . 이 입력되는 경우 잘못된 입력으로 처리
                 } else {
                     for (int i = 0; i < num2.length(); i++) {
                         char a = num2.charAt(i);//입력값 0번째부터 담아서 입력값을 1자리씩 검증하기 위한단계
@@ -110,26 +108,20 @@ public class Main {
                             continue;//입력값이 0부터 9사이 숫자면 통과
                         } else if (a == '.') {
                             dotCount++;//'.'갯수 체크
-                            if (dotCount > 1) {//소수점이 2개 이상이면 오류 출력
+                            if (dotCount >= 2) {//소수점이 2개 이상이면 오류 출력
                                 condition = false;
                                 break;//오류문구 출력하러 가기!
                             }
-                        } else if (a == '-') {//맨앞에 '-'를 입력할수없다->음수 입력불가
-                            if (i != 0) {
-                                condition = false;
-                                break;
-                            }
-                        } else {
-                            condition = false; //숫자,'.','-' 외 문자 입력시 오류 출력
-                            break;
                         }
                     }
                 }
                 if (condition == true) {
-                    number2 = Integer.parseInt(num2);//검증이 끝난 문자열을 정수로 변환하여 변수에 저장
+                    //number1 = Integer.parseInt(num1);
+                    num22 = Double.parseDouble(num2);//검증이 끝난 문자열을 정수로 변환하여 변수에 저장
+                    doubleNum2.setGnumber(num22);
                     break;
-                } else {
-                    System.out.println("0을 포함한 정수만 입력하세요!!!");
+                } else {//컨디션이 트루가 아니라면 오류문을 출력하고 다시 재입력을 시작함
+                    System.out.println("0을 포함한 실수만 입력하세요!!!");
                     System.out.println(".은 한개만 입력가능하며 - 단독입력 불가합니다.");
                 }
             }
@@ -137,7 +129,7 @@ public class Main {
 
 
 
-            result=calculator.calculate(number1, number2, op);//해당 기능의 메서드 활용후 리턴값 저장
+            result=calculator.calculate(num11, num22, op);//해당 기능의 메서드 활용후 리턴값 저장
             resultList.add(result);// 결과값을 배열에 저장
             calculator.setResult(resultList);//객체에 결과 배열을 저장
             System.out.println("결과값을 저장 하였습니다.");//저장되었다는 안내문 출력
