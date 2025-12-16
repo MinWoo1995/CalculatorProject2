@@ -49,7 +49,7 @@ public class Main {
 
                         if (a >= '0' && a <= '9') {
                             continue;//입력값이 0부터 9사이 숫자면 통과
-                        } else if (a == '.') {
+                        } else if(a == '.'){
                             dotCount++;//'.'갯수 체크
                             if (dotCount >= 2) {//소수점이 2개 이상이면 오류 출력
                                 condition = false;
@@ -107,7 +107,7 @@ public class Main {
 
                         if (a >= '0' && a <= '9') {
                             continue;//입력값이 0부터 9사이 숫자면 통과
-                        } else if (a == '.') {
+                        } else if(a == '.'){
                             dotCount++;//'.'갯수 체크
                             if (dotCount >= 2) {//소수점이 2개 이상이면 오류 출력
                                 condition = false;
@@ -128,12 +128,18 @@ public class Main {
             }
 
 
+            try{
+                //calculator클래스에서 연산과 결과값을 저장 함
+                calculator.calculate(num11, num22, op);//해당 기능의 메서드 활용후 리턴값 저장
+                //resultList.add(result);// 결과값을 배열에 저장
+                //calculator.setResult(resultList);//객체에 결과 배열을 저장
+                System.out.println("결과값을 저장 하였습니다.");//저장되었다는 안내문 출력
+            }catch(ArithmeticException e){//ArithmeticException은 수학적 오류 대표적으로 정수를 0으로 나눌려고 할때
+                System.out.println("계산오류!!"+e.getMessage());
+            }catch(IllegalArgumentException e){//IllegalArgumentException 메서드에 전달된 인자의 값자체가 부적절하거나 유효하지 않을때
+                System.out.println("입력오류!!"+e.getMessage());
+            }
 
-
-            result=calculator.calculate(num11, num22, op);//해당 기능의 메서드 활용후 리턴값 저장
-            resultList.add(result);// 결과값을 배열에 저장
-            calculator.setResult(resultList);//객체에 결과 배열을 저장
-            System.out.println("결과값을 저장 하였습니다.");//저장되었다는 안내문 출력
             resultReceive=calculator.getResult();//객체에 저장된 결과값을 불러온다.
             System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");//저장된 결과값 출력
 
@@ -141,11 +147,11 @@ public class Main {
                 System.out.println("가장 먼저 저장된 결과값을 삭제 하시겠습니까? (Y/y or N/n)");
                 String answer = sc.nextLine();//답변을 입력받음
                 if (answer.equals("Y")) {//입력받은 답변에 따른 처리구문들
-                    calculator.removeResult(0);//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
+                    calculator.removeResult();//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
                     System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");//삭제후 남은 저장값 출력
                     break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else if (answer.equals("y")) {//입력받은 답변에 따른 처리구문들
-                    calculator.removeResult(0);//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
+                    calculator.removeResult();//removeResult()메서드를 통해 첫번째 인덱스 결과값 삭제
                     System.out.println("저장된 결과값 : "+resultReceive+" 입니다.");//삭제후 남은 저장값 출력
                     break;//해당 반복문을 탈출하여, 입력값보다 큰 저장값 찾기로 넘어감
                 } else if (answer.equals("N")) {//삭제를 원하지 않는다면, 계산을 할지말지로 넘어감
